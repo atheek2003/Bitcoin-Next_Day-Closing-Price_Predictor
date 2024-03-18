@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Next Day's Close Price (Blockchain)</title>
+    <style>
+        body {
+            background-color: #000000; /* Light gray background */
+            font-family: Arial, sans-serif; /* Use Arial font */
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px; /* Set maximum width */
+            margin: 50px auto; /* Center the form */
+            padding: 20px;
+            background-color: #cde9f2; /* White background */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Drop shadow effect */
+        }
+        h1 {
+            text-align: center;
+            color: #333333; /* Dark gray text color */
+            margin-bottom: 20px; /* Add some space below the heading */
+        }
+        form {
+            text-align: left;
+        }
+        label {
+            font-weight: bold;
+            color: #555555; /* Medium gray text color */
+            display: block; /* Display each label on a new line */
+            margin-bottom: 5px; /* Add some space below each label */
+        }
+        input[type="text"] {
+            width: calc(100% - 22px); /* Adjust input width to fit container */
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #cccccc; /* Light gray border */
+            border-radius: 5px;
+            box-sizing: border-box; /* Include padding and border in element's total width and height */
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff; /* Blue submit button */
+            color: #ffffff; /* White text color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s; /* Smooth transition effect */
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3; /* Darker blue hover color */
+        }
+        .error-message {
+            color: #ff0000; /* Red error message color */
+            font-size: 14px;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            var open = document.getElementById("open").value;
+            var high = document.getElementById("high").value;
+            var low = document.getElementById("low").value;
+            var close = document.getElementById("close").value;
+            var volume = document.getElementById("volume").value;
+            // Add more validations for other fields if needed
+            
+            // Check if any of the fields is empty or not a number
+            if (isNaN(open) || isNaN(high) || isNaN(low) || isNaN(close) || isNaN(volume)) {
+                document.getElementById("error-message").innerText = "Please enter valid numeric values for all fields.";
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Predict Next Day's Close Price (Blockchain)</h1>
+        <form action="/predict" method="post" onsubmit="return validateForm()">
+            <!-- Add input fields for all features except next_day_close -->
+            <label for="open">Open (Price at the opening of the day):</label>
+            <input type="text" id="open" name="open"><br>
+            <label for="high">High (Highest price during the day):</label>
+            <input type="text" id="high" name="high"><br>
+            <label for="low">Low (Lowest price during the day):</label>
+            <input type="text" id="low" name="low"><br>
+            <label for="close">Close (Price at the close of the day):</label>
+            <input type="text" id="close" name="close"><br>
+            <label for="volume">Volume (Number of shares traded during the day):</label>
+            <input type="text" id="volume" name="volume"><br>
+            <label for="rsi_7">RSI (Relative Strength Index for 7 days):</label>
+            <input type="text" id="rsi_7" name="rsi_7"><br>
+            <label for="rsi_14">RSI (Relative Strength Index for 14 days):</label>
+            <input type="text" id="rsi_14" name="rsi_14"><br>
+            <label for="cci_7">CCI (Commodity Channel Index for 7 days):</label>
+            <input type="text" id="cci_7" name="cci_7"><br>
+            <label for="cci_14">CCI (Commodity Channel Index for 14 days):</label>
+            <input type="text" id="cci_14" name="cci_14"><br>
+            <label for="sma_50">SMA (Simple Moving Average for 50 days):</label>
+            <input type="text" id="sma_50" name="sma_50"><br>
+            <label for="ema_50">EMA (Exponential Moving Average for 50 days):</label>
+            <input type="text" id="ema_50" name="ema_50"><br>
+            <label for="sma_100">SMA (Simple Moving Average for 100 days):</label>
+            <input type="text" id="sma_100" name="sma_100"><br>
+            <label for="ema_100">EMA (Exponential Moving Average for 100 days):</label>
+            <input type="text" id="ema_100" name="ema_100"><br>
+            <label for="macd">MACD (Moving Average Convergence Divergence):</label>
+            <input type="text" id="macd" name="macd"><br>
+            <label for="bollinger">Bollinger Bands:</label>
+            <input type="text" id="bollinger" name="bollinger"><br>
+            <label for="TrueRange">True Range:</label>
+            <input type="text" id="TrueRange" name="TrueRange"><br>
+            <label for="atr_7">ATR (Average True Range for 7 days):</label>
+            <input type="text" id="atr_7" name="atr_7"><br>
+            <label for="atr_14">ATR (Average True Range for 14 days):</label>
+            <input type="text" id="atr_14" name="atr_14"><br>
+            <input type="submit" value="Predict">
+            <p id="error-message" class="error-message"></p> <!-- Display error message if any -->
+        </form>
+    </div>
+</body>
+</html>
